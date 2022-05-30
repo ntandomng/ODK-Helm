@@ -1,9 +1,10 @@
-apiVersion: apps/v1
+apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   labels:
     io.fynarfin.service: service
   name: service
+  namespace: odk  
 spec:
   replicas: 1
   selector:

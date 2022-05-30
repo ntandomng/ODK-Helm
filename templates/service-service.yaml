@@ -1,9 +1,10 @@
-apiVersion: v1
+apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
     io.fynarfin.service: service
   name: service
+  namespace: odk  
 spec:
   ports:
     - name: "8383"

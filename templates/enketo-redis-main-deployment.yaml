@@ -1,9 +1,10 @@
-apiVersion: apps/v1
+apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   labels:
     io.fynarfin.service: enketo-redis-main
   name: enketo-redis-main
+  namespace: odk  
 spec:
   replicas: 1
   selector:

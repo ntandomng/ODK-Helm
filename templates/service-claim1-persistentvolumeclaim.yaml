@@ -1,9 +1,10 @@
-apiVersion: v1
+apiVersion: {{ .Values.persistentvolumeclaim.apiversion }}
 kind: PersistentVolumeClaim
 metadata:
   labels:
     io.fynarfin.service: service-claim1
   name: service-claim1
+  namespace: odk  
 spec:
   accessModes:
     - ReadWriteOnce

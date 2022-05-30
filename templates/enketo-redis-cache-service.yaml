@@ -1,9 +1,10 @@
-apiVersion: v1
+apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
     io.fynarfin.service: enketo-redis-cache
   name: enketo-redis-cache
+  namespace: odk  
 spec:
   ports:
     - name: "6380"

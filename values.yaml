@@ -84,3 +84,21 @@ postgresql:
   postgresqlPassword: "openg2p"
   postgresqlDatabase: openg2p
   existingSecret: ""
+
+persistentvolumeclaim:
+  apiversion: "v1"
+
+ingress:
+  apiversion: "networking.k8s.io/v1"
+
+deployment:
+  apiversion: "apps/v1"
+
+service:
+  apiversion: "v1"
+
+secret:
+  apiversion: "v1"
+
+configmap:
+  apiversion: "v1"

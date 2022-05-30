@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: enketo-redis-main-configmap
+  name: enketo-redis-cache-configmap
+  namespace: odk  
 data:
   redis.conf: |
-    # Redis configuration for Enketo's main database instance
+    # Redis configuration for Enketo's XSLT Cache
 
     #supervised systemd
 
@@ -12,7 +13,7 @@ data:
 
     #pidfile /var/run/redis-enketo-cache/redis-server.pid
 
-    port 6379
+    port 6380
 
     bind 0.0.0.0
 
@@ -22,11 +23,11 @@ data:
 
     loglevel notice
 
-    #logfile /var/log/redis/redis-enketo-main.log
+    #logfile /var/log/redis/redis-enketo-cache.log
 
     databases 16
 
-    save 300 1
+    save 3600 1
 
     stop-writes-on-bgsave-error yes
 
@@ -34,7 +35,7 @@ data:
 
     rdbchecksum yes
 
-    dbfilename enketo-main.rdb
+    dbfilename enketo-cache.rdb
 
     #dir /var/lib/redis/
 
