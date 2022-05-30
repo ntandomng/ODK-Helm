@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.fynarfin.service: enketo-redis-main
+  name: enketo-redis-main
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.fynarfin.service: enketo-redis-main
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.fynarfin.service: enketo-redis-main
+    spec:
+      containers:
+        - args:
+            - redis-server
+            - /usr/local/etc/redis/redis.conf
+          image: redis:5
+          name: enketo-redis-main
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "256m"
+            limits:
+              memory: "128Mi"
+              cpu: "256m"           
+          volumeMounts:
+            - mountPath: /usr/local/etc/redis/
+              name: enketo-redis-main-configmap               
+            - mountPath: /data
+              name: enketo-redis-main
+      restartPolicy: Always
+      volumes:
+        - name: enketo-redis-main
+          persistentVolumeClaim:
+            claimName: enketo-redis-main
+        - name: enketo-redis-main-configmap
+          configMap:
+            name: enketo-redis-main-configmap                    
+status: {}

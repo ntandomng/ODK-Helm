@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.fynarfin.service: enketo
+  name: enketo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.fynarfin.service: enketo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.fynarfin.service: enketo
+    spec:
+      containers:
+        - env:
+            - name: DOMAIN
+              value: "testing-odk-nginx.ibank.financial"
+            - name: SUPPORT_EMAIL
+              value: "ntando@fynarfin.io"
+          image: ntando/odk-central-enketo:latest
+          name: enketo
+          resources: 
+            requests:
+              memory: "512Mi"
+              cpu: "1024m"
+            limits:
+              memory: "512Mi"
+              cpu: "1024m"
+          volumeMounts:
+            - mountPath: /etc/secrets
+              name: secrets-configmap
+          ports:
+            - containerPort: 8005                          
+      restartPolicy: Always
+      volumes:
+        - name: secrets-configmap
+          configMap:
+            name: secrets-configmap
+status: {}

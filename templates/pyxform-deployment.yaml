@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.fynarfin.service: pyxform
+  name: pyxform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.fynarfin.service: pyxform
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.fynarfin.service: pyxform
+    spec:
+      containers:
+        - image: ghcr.io/getodk/pyxform-http:v1.9.0
+          name: pyxform
+          ports:
+            - containerPort: 80          
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "256m"
+            limits:
+              memory: "128Mi"
+              cpu: "256m"            
+      restartPolicy: Always
+status: {}

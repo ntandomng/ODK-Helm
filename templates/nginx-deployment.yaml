@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.fynarfin.service: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.fynarfin.service: nginx
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.fynarfin.service: nginx
+    spec:
+      containers:
+        - env:
+            - name: CERTBOT_EMAIL
+              value: "ntando@fynarfin.io"
+            - name: DOMAIN
+              value: "testing-odk-nginx.ibank.financial"
+            - name: SSL_TYPE
+              value: upstream
+          image: ntando/odk-central-nginx:latest
+          livenessProbe:
+            exec:
+              command:
+                - nc -z localhost 80 || exit 1
+          name: nginx
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "256m"
+            limits:
+              memory: "128Mi"
+              cpu: "256m"          
+      restartPolicy: Always
+status: {}
