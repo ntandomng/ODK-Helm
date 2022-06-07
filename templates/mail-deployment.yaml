@@ -1,0 +1,43 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     io.fynarfin.service: mail
+#   name: mail
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       io.fynarfin.service: mail
+#   strategy:
+#     type: Recreate
+#   template:
+#     metadata:
+#       labels:
+#         io.fynarfin.service: mail
+#     spec:
+#       containers:
+#         - env:
+#             - name: MAILNAME
+#               value: "admin@fynarfin.io"
+#           image: itsissa/namshi-smtp:4.92-8.deb10u6
+#           name: mail
+#           resources: {}
+#           volumeMounts:
+#             - mountPath: /etc/exim4/_docker_additional_macros
+#               name: mail-claim0
+#               readOnly: true
+#             - mountPath: /etc/exim4/domain.key
+#               name: mail-claim1
+#               readOnly: true
+#       restartPolicy: Always
+#       volumes:
+#         - name: mail-claim0
+#           persistentVolumeClaim:
+#             claimName: mail-claim0
+#             readOnly: true
+#         - name: mail-claim1
+#           persistentVolumeClaim:
+#             claimName: mail-claim1
+#             readOnly: true
+# status: {}
