@@ -102,3 +102,18 @@ secret:
 
 configmap:
   apiversion: "v1"
+
+enketo:
+  enabled: false
+  replicas: 1
+  image: "ntando/odk-central-enketo:latest"
+  imagePullPolicy: "Always"
+  SPRING_PROFILES_ACTIVE: ""
+  limits:
+    memory: "512M"
+    cpu: "500m"
+  requests:
+    memory: "512M"
+    cpu: "100m"
+  deployment:
+    annotations: {}
