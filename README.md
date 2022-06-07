@@ -77,6 +77,14 @@ helm ls
 kubectl get all -n odk
 ```
 
+Once installation is confirmed, the first user must be created, using the following commands:
+
+```sh
+kubectl exec -i -t -n odk `kubectl get pods --no-headers -o custom-columns=":metadata.name" -n odk | grep service` -c service -- sh -c "clear; (bash || ash || sh)"
+odk-cmd --email YOUREMAIL@ADDRESSHERE.com user-create
+odk-cmd --email YOUREMAIL@ADDRESSHERE.com user-promote
+```
+
 Using the helm repository method:
 
 ```sh
