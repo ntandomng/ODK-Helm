@@ -15,6 +15,6 @@ spec:
       targetPort: 443
   selector:
     io.fynarfin.service: nginx
-  type: LoadBalancer
+#  type: LoadBalancer
 status:
   loadBalancer: {}
