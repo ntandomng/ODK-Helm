@@ -23,7 +23,8 @@ spec:
             - name: DOMAIN
               value: "testing-odk-nginx.ibank.financial"
             - name: SSL_TYPE
-              value: upstream
+              #value: upstream
+              value: letsencrypt
           image: ntando/odk-central-nginx:latest
           livenessProbe:
             exec:
