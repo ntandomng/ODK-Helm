@@ -1,4 +1,4 @@
-## Helm Chart for ODK Central
+	## Helm Chart for ODK Central
 
 ODK Central Helm Chart
 ===========

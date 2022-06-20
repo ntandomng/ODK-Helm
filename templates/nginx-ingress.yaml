@@ -1,7 +1,7 @@
 apiVersion: {{ .Values.ingress.apiversion }}
 kind: Ingress
 metadata:
-  name: nginx
+  name: odk-ingress
   namespace: odk
 status:
   loadBalancer:
