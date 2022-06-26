@@ -4,6 +4,7 @@ metadata:
   labels:
     io.fynarfin.service: mail
   name: mail
+  namespace: odk  
 spec:
   replicas: 1
   selector:
