@@ -25,7 +25,8 @@ spec:
             - ./start-odk.sh
           env:
             - name: DOMAIN
-              value: "testing-odk-nginx.ibank.financial"
+              #value: "testing-odk-nginx.ibank.financial"
+              value: "95396097-us-east.lb.appdomain.cloud"
             - name: SYSADMIN_EMAIL
               value: "ntando@fynarfin.io"
           image: ntando/odk-central-service:latest

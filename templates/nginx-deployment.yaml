@@ -21,9 +21,10 @@ spec:
             - name: CERTBOT_EMAIL
               value: "ntando@fynarfin.io"
             - name: DOMAIN
-              value: "testing-odk-nginx.ibank.financial"
+              #value: "testing-odk-nginx.ibank.financial"
+              value: "95396097-us-east.lb.appdomain.cloud"
             - name: SSL_TYPE
-              value: upstream
+              value: letsencrypt
           image: ntando/odk-central-nginx:latest
           livenessProbe:
             exec:

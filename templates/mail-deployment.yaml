@@ -1,43 +1,52 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   labels:
-#     io.fynarfin.service: mail
-#   name: mail
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       io.fynarfin.service: mail
-#   strategy:
-#     type: Recreate
-#   template:
-#     metadata:
-#       labels:
-#         io.fynarfin.service: mail
-#     spec:
-#       containers:
-#         - env:
-#             - name: MAILNAME
-#               value: "admin@fynarfin.io"
-#           image: itsissa/namshi-smtp:4.92-8.deb10u6
-#           name: mail
-#           resources: {}
-#           volumeMounts:
-#             - mountPath: /etc/exim4/_docker_additional_macros
-#               name: mail-claim0
-#               readOnly: true
-#             - mountPath: /etc/exim4/domain.key
-#               name: mail-claim1
-#               readOnly: true
-#       restartPolicy: Always
-#       volumes:
-#         - name: mail-claim0
-#           persistentVolumeClaim:
-#             claimName: mail-claim0
-#             readOnly: true
-#         - name: mail-claim1
-#           persistentVolumeClaim:
-#             claimName: mail-claim1
-#             readOnly: true
-# status: {}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.fynarfin.service: mail
+  name: mail
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.fynarfin.service: mail
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.fynarfin.service: mail
+    spec:
+      containers:
+        - env:
+            - name: MAILNAME
+              value: "ntando@fynarfin.io"
+            - name: RELAY_NETWORKS
+              value: ":192.168.0.0/24:10.0.0.0/8"
+            - name: GMAIL_USER
+              value: "ntando@fynarfin.io"
+            - name: GMAIL_PASSWORD
+              value: "putyourpasswordhere"
+          #image: itsissa/namshi-smtp:4.92-8.deb10u6
+          image: namshi/smtp:latest
+          name: mail
+          resources: {}
+          # volumeMounts:
+          #   - mountPath: /etc/exim4/_docker_additional_macros
+          #     name: mail-claim0
+          #     readOnly: true
+          #   - mountPath: /etc/exim4/domain.key
+          #     name: mail-claim1
+          #     readOnly: true
+          ports:
+            - containerPort: 25              
+      restartPolicy: Always
+      # volumes:
+      #   - name: mail-claim0
+      #     persistentVolumeClaim:
+      #       claimName: mail-claim0
+      #       readOnly: true
+      #   - name: mail-claim1
+      #     persistentVolumeClaim:
+      #       claimName: mail-claim1
+      #       readOnly: true
+status: {}

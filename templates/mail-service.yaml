@@ -1,0 +1,16 @@
+apiVersion: {{ .Values.service.apiversion }}
+kind: Service
+metadata:
+  labels:
+    io.fynarfin.service: mail
+  name: mail
+  namespace: odk  
+spec:
+  ports:
+    - name: "25"
+      port: 25
+      targetPort: 25
+  selector:
+    io.fynarfin.service: mail
+status:
+  loadBalancer: {}

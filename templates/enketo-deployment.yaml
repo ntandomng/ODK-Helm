@@ -20,7 +20,8 @@ spec:
       containers:
         - env:
             - name: DOMAIN
-              value: "testing-odk-nginx.ibank.financial"
+              #value: "testing-odk-nginx.ibank.financial"
+              value: "95396097-us-east.lb.appdomain.cloud"
             - name: SUPPORT_EMAIL
               value: "ntando@fynarfin.io"
           image: ntando/odk-central-enketo:latest
