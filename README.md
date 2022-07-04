@@ -80,7 +80,7 @@ In each of the files above, we need to replace the "value" of the "DOMAIN" envir
 Once all three files are updated with the URL, you can install the helm chart
 
 ```sh
-helm install odk ODK-Helm
+helm install odk-central ODK-Helm
 ```
 
 > IMPORTANT NOTE:
@@ -148,6 +148,24 @@ spec:
     odk.service: nginx
   type: LoadBalancer
 ```
+
+Troubleshooting
+===============
+
+Should the nginx-deployment fail to create an ssl certificate follow these steps to try resolve:
+* uninstall the helm chart
+```sh
+helm uninstall odk-central
+```
+
+* uninstall the nginx-service
+```sh
+kubectl delete -f ./nginx-service.yaml
+```
+
+* redeploy the nginx-service
+* install the helm chart
+
 
 License
 =======
