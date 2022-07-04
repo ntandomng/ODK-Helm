@@ -2,7 +2,7 @@
 # kind: Service
 # metadata:
 #   labels:
-#     io.fynarfin.service: nginx
+#     odkservice: nginx
 #   name: nginx
 #   namespace: odk  
 # spec:
@@ -14,7 +14,5 @@
 #       port: 443
 #       targetPort: 443
 #   selector:
-#     io.fynarfin.service: nginx
-# #  type: LoadBalancer
-# status:
-#   loadBalancer: {}
+#     odk.service: nginx
+#   type: LoadBalancer

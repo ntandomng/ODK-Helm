@@ -2,21 +2,21 @@ apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   labels:
-    io.fynarfin.service: service
+    odk.service: service
   name: service
   namespace: odk  
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.fynarfin.service: service
+      odk.service: service
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.fynarfin.service: service
-    spec:
+        odk.service: service
+    spec: 
       containers:
         - args:
             - ./wait-for-it.sh
@@ -25,8 +25,7 @@ spec:
             - ./start-odk.sh
           env:
             - name: DOMAIN
-              #value: "testing-odk-nginx.ibank.financial"
-              value: "95396097-us-east.lb.appdomain.cloud"
+              value: "PASTE-NEW-VALUE-FROM-COPIED-LOADBALANCER-URL-HERE"
             - name: SYSADMIN_EMAIL
               value: "ntando@fynarfin.io"
           image: ntando/odk-central-service:latest
@@ -53,4 +52,3 @@ spec:
         - name: service-claim1
           persistentVolumeClaim:
             claimName: service-claim1
-status: {}

@@ -2,7 +2,7 @@ apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
-    io.fynarfin.service: enketo
+    odk.service: enketo
   name: enketo
   namespace: odk  
 spec:
@@ -11,6 +11,4 @@ spec:
       port: 8005
       targetPort: 8005
   selector:
-    io.fynarfin.service: enketo
-status:
-  loadBalancer: {}
+    odk.service: enketo

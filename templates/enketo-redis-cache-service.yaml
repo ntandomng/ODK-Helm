@@ -2,7 +2,7 @@ apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
-    io.fynarfin.service: enketo-redis-cache
+    odk.service: enketo-redis-cache
   name: enketo-redis-cache
   namespace: odk  
 spec:
@@ -11,6 +11,4 @@ spec:
       port: 6380
       targetPort: 6380
   selector:
-    io.fynarfin.service: enketo-redis-cache
-status:
-  loadBalancer: {}
+    odk.service: enketo-redis-cache

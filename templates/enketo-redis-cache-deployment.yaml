@@ -2,20 +2,20 @@ apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   labels:
-    io.fynarfin.service: enketo-redis-cache
+    odk.service: enketo-redis-cache
   name: enketo-redis-cache
   namespace: odk  
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.fynarfin.service: enketo-redis-cache
+      odk.service: enketo-redis-cache
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.fynarfin.service: enketo-redis-cache
+        odk.service: enketo-redis-cache
     spec:
       containers:
         - args:
@@ -44,5 +44,4 @@ spec:
             claimName: enketo-redis-cache
         - name: enketo-redis-cache-configmap
           configMap:
-            name: enketo-redis-cache-configmap          
-status: {}
+            name: enketo-redis-cache-configmap

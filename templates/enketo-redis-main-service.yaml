@@ -2,7 +2,7 @@ apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
-    io.fynarfin.service: enketo-redis-main
+    odk.service: enketo-redis-main
   name: enketo-redis-main
   namespace: odk  
 spec:
@@ -11,6 +11,4 @@ spec:
       port: 6379
       targetPort: 6379
   selector:
-    io.fynarfin.service: enketo-redis-main
-status:
-  loadBalancer: {}
+    odk.service: enketo-redis-main

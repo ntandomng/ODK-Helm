@@ -2,7 +2,7 @@ apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
-    io.fynarfin.service: postgres
+    odk.service: postgres
   name: postgres
   namespace: odk  
 spec:
@@ -11,6 +11,4 @@ spec:
       port: 5432
       targetPort: 5432
   selector:
-    io.fynarfin.service: postgres
-status:
-  loadBalancer: {}
+    odk.service: postgres

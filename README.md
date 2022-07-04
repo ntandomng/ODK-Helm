@@ -57,12 +57,35 @@ Install the dependencies start the server:
 ```sh
 git clone https://github.com/ntandomng/ODK-Helm.git
 kubectl config get-contexts
+kubectl apply -f ./namespace.yaml && kubectl apply -f ./nginx-service.yaml #PLEASE CREATE THESE MANIFESTS AS PER THE K8S MANIFESTS SECTION
+```
+
+After the namespace and nginx-service are both installed, wait until the loadbalancer IP address (a URL) is generated, then grab that URL and paste it in the following three files under the ODK-Helm/charts/templates directory.
+ 
+# enketo-deployment.yaml
+# nginx-deployment.yaml
+# service-deployment.yaml
+
+In each of the files above, we need to replace the "value" of the "DOMAIN" environment variable, by pasting over the string "PASTE-NEW-VALUE-FROM-COPIED-LOADBALANCER-HERE" as per the following example
+
+```
+      containers:
+        - env:
+            - name: DOMAIN
+              value: "PASTE-NEW-VALUE-FROM-COPIED-LOADBALANCER-URL-HERE"
+            - name: SUPPORT_EMAIL
+              value: "ntando@fynarfin.io"
+```
+
+Once all three files are updated with the URL, you can install the helm chart
+
+```sh
 helm install odk ODK-Helm
 ```
 
 > IMPORTANT NOTE:
-> Before applying the helm chart ensure that the enketo secret and api keys are unique to your deployment. 
-> First Generate the secrets and keys (after cloning the repository) using the following commands:
+> The enketo secret and api keys are unique to your deployment.
+> The chart automatically generates these for you, but in case you wanted to manually generate these, see the below commands:
 
 ```sh
 sed -i "/^[[:space:]]*enketo-secret:/ s/:.*/: `LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom | head -c64 `/" ./ODK-Helm/templates/secrets-configmap.yaml
@@ -91,6 +114,40 @@ Using the helm repository method:
 #echo fill this in when the app is added on the helm repo
 ```
 
+K8S Manifests
+=============
+Create two files OUTSIDE the chart directory named namespace.yaml and nginx-service.yaml (these will be used in the installation process)
+
+Namespace
+```
+ apiVersion: v1
+ kind: Namespace
+ metadata:
+   name: odk
+```
+
+
+Nginx Service
+```
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    odk.service: nginx
+  name: nginx
+  namespace: odk
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+    - name: "443"
+      port: 443
+      targetPort: 443
+  selector:
+    odk.service: nginx
+  type: LoadBalancer
+```
 
 License
 =======

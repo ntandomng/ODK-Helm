@@ -2,26 +2,25 @@ apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   labels:
-    io.fynarfin.service: enketo
+    odk.service: enketo
   name: enketo
   namespace: odk
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.fynarfin.service: enketo
+      odk.service: enketo
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.fynarfin.service: enketo
+        odk.service: enketo
     spec:
       containers:
         - env:
             - name: DOMAIN
-              #value: "testing-odk-nginx.ibank.financial"
-              value: "95396097-us-east.lb.appdomain.cloud"
+              value: "3ca97ecf-us-east.lb.appdomain.cloud"
             - name: SUPPORT_EMAIL
               value: "ntando@fynarfin.io"
           image: ntando/odk-central-enketo:latest
@@ -43,4 +42,3 @@ spec:
         - name: secrets-configmap
           configMap:
             name: secrets-configmap
-status: {}

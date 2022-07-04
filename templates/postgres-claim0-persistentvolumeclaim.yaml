@@ -2,7 +2,7 @@ apiVersion: {{ .Values.persistentvolumeclaim.apiversion }}
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    io.fynarfin.service: postgres-claim0
+    odk.service: postgres-claim0
   name: postgres-claim0
   namespace: odk  
 spec:
@@ -11,4 +11,3 @@ spec:
   resources:
     requests:
       storage: 100Mi
-status: {}

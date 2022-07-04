@@ -2,27 +2,26 @@ apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   labels:
-    io.fynarfin.service: nginx
+    odk.service: nginx
   name: nginx
   namespace: odk  
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.fynarfin.service: nginx
+      odk.service: nginx
   strategy: {}
   template:
     metadata:
       labels:
-        io.fynarfin.service: nginx
-    spec:
+        odk.service: nginx
+    spec:   
       containers:
         - env:
             - name: CERTBOT_EMAIL
               value: "ntando@fynarfin.io"
-            - name: DOMAIN
-              #value: "testing-odk-nginx.ibank.financial"
-              value: "95396097-us-east.lb.appdomain.cloud"
+            - name: DOMAIN            
+              value: "3ca97ecf-us-east.lb.appdomain.cloud"
             - name: SSL_TYPE
               value: letsencrypt
           image: ntando/odk-central-nginx:latest
@@ -42,4 +41,3 @@ spec:
               memory: "128Mi"
               cpu: "256m"          
       restartPolicy: Always
-status: {}

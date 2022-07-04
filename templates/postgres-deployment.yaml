@@ -2,20 +2,20 @@ apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   labels:
-    io.fynarfin.service: postgres
+    odk.service: postgres
   name: postgres
   namespace: odk  
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.fynarfin.service: postgres
+      odk.service: postgres
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.fynarfin.service: postgres
+        odk.service: postgres
     spec:
       containers:
         - env:
@@ -45,4 +45,3 @@ spec:
         - name: postgres-claim0
           persistentVolumeClaim:
             claimName: postgres-claim0
-status: {}

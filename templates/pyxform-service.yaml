@@ -2,7 +2,7 @@ apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
-    io.fynarfin.service: pyxform
+    odk.service: pyxform
   name: pyxform
   namespace: odk  
 spec:
@@ -11,6 +11,4 @@ spec:
       port: 80
       targetPort: 80
   selector:
-    io.fynarfin.service: pyxform
-status:
-  loadBalancer: {}
+    odk.service: pyxform

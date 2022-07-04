@@ -2,7 +2,7 @@ apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
-    io.fynarfin.service: service
+    odk.service: service
   name: service
   namespace: odk  
 spec:
@@ -11,6 +11,4 @@ spec:
       port: 8383
       targetPort: 8383
   selector:
-    io.fynarfin.service: service
-status:
-  loadBalancer: {}
+    odk.service: service
